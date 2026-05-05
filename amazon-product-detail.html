@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1200">
+    <title>WUJILUXM Invisible Zipper</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, 'Source Han Sans CN', sans-serif;
+            background: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.6;
+            width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Page Title */
+        .page-title {
+            text-align: center;
+            padding: 60px 40px 40px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .page-title h1 {
+            font-size: 72px;
+            font-weight: 700;
+            color: #111;
+            letter-spacing: 4px;
+        }
+
+        /* Header */
+        .header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            padding: 60px 40px 60px 80px;
+            align-items: center;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .header-images {
+            width: 80%;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-left: 25%;
+        }
+
+        .header-images img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .header-info {
+            padding: 20px 0;
+        }
+
+        .brand {
+            font-size: 13px;
+            color: #888;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+
+        .title {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            line-height: 1.3;
+            color: #111;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 17px;
+            color: #666;
+            margin-bottom: 32px;
+            line-height: 1.8;
+        }
+
+        .bullets {
+            list-style: none;
+        }
+
+        .bullets li {
+            padding: 12px 0;
+            font-size: 14px;
+            color: #333;
+            border-bottom: 1px solid #f5f5f5;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            line-height: 1.7;
+        }
+
+        .bullets li:last-child {
+            border-bottom: none;
+        }
+
+        .bullets li::before {
+            content: "✓";
+            color: #c5a863;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        /* Section Common */
+        .section {
+            padding: 60px 40px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 48px;
+            letter-spacing: 2px;
+            color: #111;
+        }
+
+        /* About This Item */
+        .about-item {
+            background: #fafafa;
+            border-radius: 12px;
+            padding: 48px;
+        }
+
+        .about-item .bullets {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Product Features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 40px 24px;
+            background: #fafafa;
+            border-radius: 12px;
+        }
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-icon svg {
+            width: 44px;
+            height: 44px;
+            stroke: #c5a863;
+        }
+
+        .feature-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #111;
+        }
+
+        .feature-desc {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* 功能图 - 中心环绕布局 */
+        .func-diagram {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            height: 600px;
+        }
+
+        .func-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -200px;
+            margin-top: -200px;
+            width: 400px;
+            height: 400px;
+            background: #fafafa;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .func-center img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* 四个角的卖点块 */
+        .feature-bubble {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 140px;
+        }
+
+        .bubble-icon {
+            width: 56px;
+            height: 56px;
+            background: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #c5a863;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 8px rgba(197, 168, 99, 0.2);
+        }
+
+        .bubble-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: #c5a863;
+        }
+
+        .bubble-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 6px;
+        }
+
+        .bubble-desc {
+            font-size: 12px;
+            color: #888;
+            line-height: 1.5;
+        }
+
+        /* 四个卖点块位置 */
+        .bubble-tl { top: 0; left: 0; }
+        .bubble-tr { top: 0; right: 0; }
+        .bubble-bl { bottom: 0; left: 0; }
+        .bubble-br { bottom: 0; right: 0; }
+
+        /* 虚线连接 - 斜向 */
+        .connector {
+            position: absolute;
+            width: 80px;
+            height: 0;
+            border-top: 2px dashed #ccc;
+        }
+
+        .connector-tl {
+            top: 80px;
+            left: 160px;
+            transform: rotate(45deg);
+            transform-origin: left center;
+        }
+
+        .connector-tr {
+            top: 80px;
+            right: 160px;
+            transform: rotate(-45deg);
+            transform-origin: right center;
+        }
+
+        .connector-bl {
+            bottom: 80px;
+            left: 160px;
+            transform: rotate(-45deg);
+            transform-origin: left center;
+        }
+
+        .connector-br {
+            bottom: 80px;
+            right: 160px;
+            transform: rotate(45deg);
+            transform-origin: right center;
+        }
+            color: #c5a863;
+            line-height: 1.1;
+        }
+
+        .stat-label {
+            font-size: 15px;
+            color: #666;
+        }
+
+        /* 场景图 - 田字格布局 */
+        .scene-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 24px;
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            aspect-ratio: 1 / 1;
+            padding: 24px;
+            background: #fff;
+        }
+
+        .scene-cell {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px 20px 0 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .scene-cell img {
+            width: 100%;
+            height: calc(100% - 50px);
+            object-fit: cover;
+        }
+
+        .scene-label {
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fafafa;
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* 隐藏 Comparison 区域 */
+        #vs-compare {
+            display: none;
+        }
+
+        .scene-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -130px;
+            margin-top: -130px;
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 0 0 6px #fff, 0 8px 25px rgba(0,0,0,0.12);
+            z-index: 10;
+        }
+
+        .scene-center img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* 细节展示 - 背景图+左侧标注布局 */
+        .detail-gallery {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            aspect-ratio: 16 / 10;
+            overflow: hidden;
+            border-radius: 16px;
+        }
+
+        .detail-bg {
+            position: absolute;
+            left: 240px;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+
+        .detail-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #fff;
+        }
+
+        .detail-annotations {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 240px;
+            background: linear-gradient(to right, rgba(255,255,255,0.9) 60%, rgba(255,255,255,0));
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            padding: 30px 20px;
+        }
+
+        .annotation-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .annotation-icon {
+            width: 48px;
+            height: 48px;
+            background: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #c5a863;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(197,168,99,0.2);
+        }
+
+        .annotation-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: #c5a863;
+        }
+
+        .annotation-text {
+            flex: 1;
+            font-size: 15px;
+            font-weight: 600;
+            color: #111;
+            white-space: nowrap;
+        }
+
+        .annotation-line {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(to right, #c5a863, transparent);
+            flex-shrink: 0;
+        }
+            letter-spacing: 1px;
+        }
+
+        .detail-desc {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* VS 对比图 */
+        .vs-compare {
+            display: flex;
+            align-items: stretch;
+            gap: 0;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .vs-item {
+            flex: 1;
+            text-align: center;
+            padding: 30px;
+            position: relative;
+        }
+
+        .vs-left {
+            background: #fafafa;
+            border-radius: 16px 0 0 16px;
+        }
+
+        .vs-right {
+            background: #fff;
+            border: 2px solid #c5a863;
+            border-radius: 0 16px 16px 0;
+        }
+
+        /* 按显示位置调整：品牌在左，传统在右 */
+        .vs-compare .vs-item:first-child {
+            border-radius: 16px 0 0 16px;
+            border: 2px solid #c5a863;
+        }
+
+        .vs-compare .vs-item:last-child {
+            border-radius: 0 16px 16px 0;
+            border: none;
+            background: #fafafa;
+        }
+
+        .vs-divider {
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+        }
+
+        .vs-vs {
+            width: 48px;
+            height: 48px;
+            background: #111;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .vs-img {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 20px;
+            overflow: hidden;
+            background: #f5f5f5;
+        }
+
+        .vs-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .vs-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .vs-badge-no {
+            background: #999;
+        }
+
+        .vs-badge-yes {
+            background: #c5a863;
+        }
+
+        .vs-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 20px;
+        }
+
+        .vs-specs {
+            text-align: left;
+        }
+
+        .vs-spec {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 15px;
+        }
+
+        .vs-spec:last-child {
+            border-bottom: none;
+        }
+
+        .spec-label {
+            color: #888;
+        }
+
+        .vs-right .spec-value {
+            color: #c5a863;
+            font-weight: 600;
+        }
+
+        .vs-divider {
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+        }
+
+        .vs-vs {
+            width: 48px;
+            height: 48px;
+            background: #111;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        /* Specifications */
+        .specs-layout {
+            display: flex;
+            gap: 50px;
+            max-width: 900px;
+            padding-left: 150px;
+            box-sizing: border-box;
+            align-items: center;
+        }
+
+        .specs-image {
+            flex: 0 0 300px;
+        }
+
+        .specs-image img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            background: #f5f5f5;
+        }
+
+        .specs-image-label {
+            text-align: center;
+            padding: 12px 0;
+            font-size: 13px;
+            color: #888;
+        }
+
+        .specs-wrapper {
+            flex: 1;
+        }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .specs-table tr {
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .specs-table tr:last-child {
+            border-bottom: none;
+        }
+
+        .specs-table th {
+            text-align: left;
+            padding: 18px 24px 18px 0;
+            font-size: 13px;
+            color: #888;
+            width: 35%;
+            letter-spacing: 1px;
+        }
+
+        .specs-table td {
+            padding: 18px 0 18px 24px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .length-td {
+            padding: 12px 0 12px 24px;
+        }
+
+        .length-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px 32px;
+        }
+
+        .length-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: #333;
+        }
+
+        .length-in {
+            color: #333;
+        }
+
+        .length-arrow {
+            color: #333;
+        }
+
+        .length-cm {
+            color: #666;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 60px 40px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .footer-brand {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: 4px;
+            color: #111;
+        }
+
+        .footer-tagline {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 32px;
+        }
+
+        .footer-assurance {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            flex-wrap: wrap;
+        }
+
+        .footer-assurance span {
+            font-size: 12px;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-assurance span::before {
+            content: "✓";
+            color: #c5a863;
+        }
+
+        /* Export Button */
+        .export-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 12px 24px;
+            background: #111;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .export-btn:hover {
+            background: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <button class="export-btn">Export Image</button>
+
+    <!-- 页面大标题 -->
+    <div class="page-title" id="page-title">
+        <h1>WUJILUXM</h1>
+    </div>
+
+    <!-- 头部：主图+产品信息 -->
+    <section class="header" id="header-section">
+        <div class="header-images">
+            <img src="第二版成品图/隐形拉链主图/黑色/头部1.png" alt="Product Image">
+        </div>
+        <div class="header-info">
+            <h1 class="title">Invisible Zipper</h1>
+            <p class="subtitle">Premium Quality & Performance</p>
+            <ul class="bullets">
+                <li>Invisible Seamless Finish</li>
+                <li>Ultra-Smooth & Snag-Free Glide</li>
+                <li>Versatile for Clothing & Home Decor</li>
+                <li>Eco-Friendly & Skin-Friendly Fabric</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Section 1: 功能图 -->
+    <section class="section">
+        <h2 class="section-title">Features</h2>
+        <div class="func-diagram" id="func-diagram">
+            <!-- 左上卖点块 -->
+            <div class="feature-bubble bubble-tl">
+                <div class="bubble-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5"/>
+                        <path d="M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <div class="bubble-title">Smooth Nylon</div>
+                <div class="bubble-desc">Premium nylon material with fine texture</div>
+            </div>
+            <div class="connector connector-tl"></div>
+
+            <!-- 右上卖点块 -->
+            <div class="feature-bubble bubble-tr">
+                <div class="bubble-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14"/>
+                        <path d="M12 5l7 7-7 7"/>
+                    </svg>
+                </div>
+                <div class="bubble-title">Easy Glide</div>
+                <div class="bubble-desc">Smooth pull without jamming</div>
+            </div>
+            <div class="connector connector-tr"></div>
+
+            <!-- 中心产品图 -->
+            <div class="func-center">
+                <img src="第二版成品图/隐形拉链主图/黑色/头尾部.png" alt="Product Display">
+            </div>
+
+            <!-- 左下卖点块 -->
+            <div class="feature-bubble bubble-bl">
+                <div class="bubble-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="6" cy="6" r="3"/>
+                        <path d="M8.12 8.12L12 12"/>
+                        <path d="M20 4L8.12 15.88"/>
+                        <circle cx="6" cy="18" r="3"/>
+                        <path d="M14.8 14.8L20 20"/>
+                    </svg>
+                </div>
+                <div class="bubble-title">Cuttable</div>
+                <div class="bubble-desc">Can be cut to desired length</div>
+            </div>
+            <div class="connector connector-bl"></div>
+
+            <!-- 右下卖点块 -->
+            <div class="feature-bubble bubble-br">
+                <div class="bubble-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                    </svg>
+                </div>
+                <div class="bubble-title">Sewing Friendly</div>
+                <div class="bubble-desc">Easy to sew by machine or hand</div>
+            </div>
+            <div class="connector connector-br"></div>
+        </div>
+    </section>
+
+    <!-- Section 2: 场景展示 -->
+    <section class="section">
+        <h2 class="section-title">Scenarios</h2>
+        <div class="scene-grid" id="scene-grid">
+            <div class="scene-cell">
+                <img src="场景图/Elegant Dresses.jpeg" alt="Elegant Dresses Scene">
+                <div class="scene-label">Elegant Dresses</div>
+            </div>
+            <div class="scene-cell">
+                <img src="场景图/Premium Pillows .jpeg" alt="Premium Pillows Scene">
+                <div class="scene-label">Premium Pillows</div>
+            </div>
+            <div class="scene-cell">
+                <img src="场景图/Slim-fit Skirts.jpeg" alt="Slim-fit Skirts Scene">
+                <div class="scene-label">Slim-fit Skirts</div>
+            </div>
+            <div class="scene-cell">
+                <img src="场景图/Plush Toys.jpeg" alt="Plush Toys Scene">
+                <div class="scene-label">Plush Toys</div>
+            </div>
+            <div class="scene-center">
+                <img src="第二版成品图/隐形拉链主图/米色/米色头部.png" alt="Product">
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: 细节展示 -->
+    <section class="section">
+        <h2 class="section-title">Details</h2>
+        <div class="detail-gallery" id="detail-gallery">
+            <div class="detail-bg">
+                <img src="第二版成品图/隐形拉链主图/黑色/正背面2.png" alt="Zipper Detail">
+            </div>
+            <div class="detail-annotations">
+                <div class="annotation-item">
+                    <div class="annotation-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/>
+                            <line x1="16" y1="8" x2="2" y2="22"/>
+                            <line x1="17.5" y1="15" x2="9" y2="15"/>
+                        </svg>
+                    </div>
+                    <div class="annotation-text">Soft Touch</div>
+                    <div class="annotation-line"></div>
+                </div>
+                <div class="annotation-item">
+                    <div class="annotation-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                        </svg>
+                    </div>
+                    <div class="annotation-text">Fray Resistant</div>
+                    <div class="annotation-line"></div>
+                </div>
+                <div class="annotation-item">
+                    <div class="annotation-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </div>
+                    <div class="annotation-text">Colorfast</div>
+                    <div class="annotation-line"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3.5: VS 对比图 -->
+    <section class="section" style="display: none;">
+        <h2 class="section-title">Comparison</h2>
+        <div class="vs-compare" id="vs-compare">
+            <div class="vs-item">
+                <div class="vs-img">
+                    <img src="第一版成品图/主图.png" alt="Our Product">
+                </div>
+                <div class="vs-badge vs-badge-yes">✓</div>
+                <div class="vs-title">Our Product</div>
+                <div class="vs-specs">
+                    <div class="vs-spec"><span class="spec-label">Material</span><span class="spec-value"><!-- 镀金黄铜 不生锈 -->Our product comparison data 1</span></div>
+                    <div class="vs-spec"><span class="spec-label">Lifespan</span><span class="spec-value"><!-- 10年+ -->Our product comparison data 2</span></div>
+                    <div class="vs-spec"><span class="spec-label">Open/Close</span><span class="spec-value"><!-- 20000+次 -->Our product comparison data 3</span></div>
+                    <div class="vs-spec"><span class="spec-label">Corrosion</span><span class="spec-value"><!-- 优 防汗防潮 -->Our product comparison data 4</span></div>
+                </div>
+            </div>
+            <div class="vs-divider">
+                <div class="vs-vs">VS</div>
+            </div>
+            <div class="vs-item">
+                <div class="vs-img">
+                    <img src="demo图/传统拉链.png" alt="Competitor">
+                </div>
+                <div class="vs-badge vs-badge-no">✗</div>
+                <div class="vs-title">Competitor</div>
+                <div class="vs-specs">
+                    <div class="vs-spec"><span class="spec-label">Material</span><span class="spec-value"><!-- 普通金属 易生锈 -->Competitor comparison data 1</span></div>
+                    <div class="vs-spec"><span class="spec-label">Lifespan</span><span class="spec-value"><!-- 1-2年 -->Competitor comparison data 2</span></div>
+                    <div class="vs-spec"><span class="spec-label">Open/Close</span><span class="spec-value"><!-- 约5000次 -->Competitor comparison data 3</span></div>
+                    <div class="vs-spec"><span class="spec-label">Corrosion</span><span class="spec-value"><!-- 差 易褪色 -->Competitor comparison data 4</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: 产品规格 -->
+    <section class="section">
+        <h2 class="section-title">Product Specifications</h2>
+        <div class="specs-layout" id="specs-layout">
+            <div class="specs-image">
+                <img src="第二版成品图/隐形拉链主图/黑色/头尾部.png" alt="Size Chart">
+                <div class="specs-image-label"></div>
+            </div>
+            <div class="specs-wrapper">
+                <table class="specs-table">
+                    <tr>
+                        <th>Brand</th>
+                        <td>WUJILUXM</td>
+                    </tr>
+                    <tr>
+                        <th>Material</th>
+                        <td>Nylon</td>
+                    </tr>
+                    <tr>
+                        <th>Zipper Size</th>
+                        <td>#3</td>
+                    </tr>
+                    <tr>
+                        <th>Length</th>
+                        <td class="length-td">
+                            <div class="length-grid">
+                                <span class="length-item"><span class="length-in">4in</span><span class="length-arrow">-</span><span class="length-cm">10cm</span></span>
+                                <span class="length-item"><span class="length-in">5in</span><span class="length-arrow">-</span><span class="length-cm">13cm</span></span>
+                                <span class="length-item"><span class="length-in">6in</span><span class="length-arrow">-</span><span class="length-cm">15cm</span></span>
+                                <span class="length-item"><span class="length-in">7in</span><span class="length-arrow">-</span><span class="length-cm">18cm</span></span>
+                                <span class="length-item"><span class="length-in">8in</span><span class="length-arrow">-</span><span class="length-cm">20cm</span></span>
+                                <span class="length-item"><span class="length-in">9in</span><span class="length-arrow">-</span><span class="length-cm">23cm</span></span>
+                                <span class="length-item"><span class="length-in">10in</span><span class="length-arrow">-</span><span class="length-cm">25cm</span></span>
+                                <span class="length-item"><span class="length-in">11in</span><span class="length-arrow">-</span><span class="length-cm">28cm</span></span>
+                                <span class="length-item"><span class="length-in">12in</span><span class="length-arrow">-</span><span class="length-cm">30cm</span></span>
+                                <span class="length-item"><span class="length-in">14in</span><span class="length-arrow">-</span><span class="length-cm">36cm</span></span>
+                                <span class="length-item"><span class="length-in">16in</span><span class="length-arrow">-</span><span class="length-cm">41cm</span></span>
+                                <span class="length-item"><span class="length-in">18in</span><span class="length-arrow">-</span><span class="length-cm">46cm</span></span>
+                                <span class="length-item"><span class="length-in">20in</span><span class="length-arrow">-</span><span class="length-cm">51cm</span></span>
+                                <span class="length-item"><span class="length-in">22in</span><span class="length-arrow">-</span><span class="length-cm">56cm</span></span>
+                                <span class="length-item"><span class="length-in">24in</span><span class="length-arrow">-</span><span class="length-cm">61cm</span></span>
+                                <span class="length-item"><span class="length-in">26in</span><span class="length-arrow">-</span><span class="length-cm">66cm</span></span>
+                                <span class="length-item"><span class="length-in">28in</span><span class="length-arrow">-</span><span class="length-cm">71cm</span></span>
+                            </div>
+                        </td>
+                    </tr>
+                <tr>
+                    <th>Closure Type</th>
+                    <td>Closed-End Zipper</td>
+                </tr>
+                <tr>
+                    <th>Special Feature</th>
+                    <td>After the Zipper Is Closed, the Zipper Teeth Are Hidden, and the Appearance Is Smooth</td>
+                </tr>
+                <tr>
+                    <th>Packaging</th>
+                    <td>Zipper Bag</td>
+                </tr>
+                <tr>
+                    <th>Application</th>
+                    <td>Pillows, Cushions, Pants, Dress</td>
+                </tr>
+            </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- 底部：品牌信息 -->
+    <footer class="footer" id="footer-section">
+        <div class="footer-brand">WUJILUXM</div>
+        <div class="footer-tagline">Expert in Sewing Supplies · Quality Guaranteed · Professional Choice</div>
+        <div class="footer-assurance">
+            <span>Easy Returns</span>
+            <span>100% Quality Inspection</span>
+            <span>Lifetime Customer Support</span>
+        </div>
+    </footer>
+
+</body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script>
+async function exportAsImage(elementId, filename) {
+    const element = elementId ? document.getElementById(elementId) : document.body;
+    const btn = document.querySelector('.export-btn');
+    btn.textContent = 'Exporting...';
+    btn.disabled = true;
+
+    const originalScroll = window.scrollY;
+    window.scrollTo(0, 0);
+
+    try {
+        // 等待页面完全渲染
+        await new Promise(resolve => setTimeout(resolve, 500));
+
+        // 确保所有图片加载完成
+        const images = element.querySelectorAll('img');
+        await Promise.all(Array.from(images).map(img => {
+            if (img.complete) return Promise.resolve();
+            return new Promise((resolve, reject) => {
+                img.onload = resolve;
+                img.onerror = resolve; // 即使加载失败也继续
+            });
+        }));
+
+        // 额外等待确保渲染完成
+        await new Promise(resolve => setTimeout(resolve, 500));
+
+        // 直接对元素截图
+        // 先移除导出按钮，避免被截取
+        var originalExportBtn = document.querySelector('.export-btn');
+        var originalExportBtnParent = originalExportBtn ? originalExportBtn.parentNode : null;
+        var originalExportBtnNext = originalExportBtn ? originalExportBtn.nextSibling : null;
+        if (originalExportBtn) originalExportBtn.remove();
+
+        const canvas = await html2canvas(element, {
+            scale: 4,
+            useCORS: true,
+            allowTaint: true,
+            backgroundColor: '#ffffff',
+            logging: false,
+            imageTimeout: 0,
+            scrollX: 0,
+            scrollY: 0,
+            windowWidth: document.body.scrollWidth,
+            windowHeight: document.body.scrollHeight
+        });
+
+        // 恢复导出按钮
+        if (originalExportBtn && originalExportBtnParent) {
+            originalExportBtnParent.insertBefore(originalExportBtn, originalExportBtnNext);
+        }
+
+        const link = document.createElement('a');
+        link.download = filename + '.png';
+        link.href = canvas.toDataURL('image/png', 1.0);
+        link.click();
+
+        btn.textContent = 'Export Image';
+        btn.disabled = false;
+        window.scrollTo(0, originalScroll);
+        closeExportMenu();
+
+    } catch (error) {
+        console.error('Export failed:', error);
+        btn.textContent = 'Export Image';
+        btn.disabled = false;
+        window.scrollTo(0, originalScroll);
+        alert('Export failed');
+    }
+}
+
+async function exportAllImages() {
+    const btn = document.querySelector('.export-btn');
+    btn.textContent = 'Packaging...';
+    btn.disabled = true;
+    closeExportMenu();
+
+    const originalScroll = window.scrollY;
+    window.scrollTo(0, 0);
+
+    try {
+        const zip = new JSZip();
+
+        // 等待页面完全渲染
+        await new Promise(resolve => setTimeout(resolve, 500));
+
+        const sections = [
+            { id: null, name: 'Full Page' },
+            { id: 'page-title', name: 'Page Title' },
+            { id: 'header-section', name: 'Header' },
+            { id: 'func-diagram', name: 'Features' },
+            { id: 'scene-grid', name: 'Scenarios' },
+            { id: 'detail-gallery', name: 'Details' },
+            { id: 'specs-layout', name: 'Specifications' },
+            { id: 'footer-section', name: 'Footer' }
+        ];
+
+        for (let i = 0; i < sections.length; i++) {
+            const section = sections[i];
+            const element = section.id ? document.getElementById(section.id) : document.body;
+
+            const images = element.querySelectorAll('img');
+            await Promise.all(Array.from(images).map(img => {
+                if (img.complete) return Promise.resolve();
+                return new Promise((resolve, reject) => {
+                    img.onload = resolve;
+                    img.onerror = resolve;
+                });
+            }));
+
+            await new Promise(resolve => setTimeout(resolve, 500));
+
+            // 先移除导出按钮，避免被截取
+            var originalExportBtn = document.querySelector('.export-btn');
+            var originalExportBtnParent = originalExportBtn ? originalExportBtn.parentNode : null;
+            var originalExportBtnNext = originalExportBtn ? originalExportBtn.nextSibling : null;
+            if (originalExportBtn) originalExportBtn.remove();
+
+            const canvas = await html2canvas(element, {
+                scale: 4,
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: '#ffffff',
+                logging: false,
+                imageTimeout: 0,
+                scrollX: 0,
+                scrollY: 0,
+                windowWidth: document.body.scrollWidth,
+                windowHeight: document.body.scrollHeight
+            });
+
+            // 恢复导出按钮
+            if (originalExportBtn && originalExportBtnParent) {
+                originalExportBtnParent.insertBefore(originalExportBtn, originalExportBtnNext);
+            }
+
+            const dataUrl = canvas.toDataURL('image/png', 1.0);
+            const base64 = dataUrl.split(',')[1];
+            zip.file(section.name + '.png', base64, { base64: true });
+        }
+
+        const content = await zip.generateAsync({ type: 'blob' });
+        const link = document.createElement('a');
+        link.download = 'product-images.zip';
+        link.href = URL.createObjectURL(content);
+        link.click();
+        URL.revokeObjectURL(link.href);
+
+        btn.textContent = 'Export Image';
+        btn.disabled = false;
+        window.scrollTo(0, originalScroll);
+
+    } catch (error) {
+        console.error('Export failed:', error);
+        btn.textContent = 'Export Image';
+        btn.disabled = false;
+        window.scrollTo(0, originalScroll);
+        alert('Export failed, please try again');
+    }
+}
+
+function showExportMenu() {
+    const menu = document.createElement('div');
+    menu.id = 'export-menu';
+    menu.style.cssText = 'position:fixed;top:60px;right:20px;background:#fff;border:1px solid #ddd;border-radius:8px;padding:10px;z-index:1001;box-shadow:0 4px 12px rgba(0,0,0,0.15);';
+    menu.innerHTML = `
+        <div style="padding:8px 12px;font-weight:700;color:#111;border-bottom:1px solid #eee;margin-bottom:8px;">Select Export Area</div>
+        <div onclick="exportAsImage(null, 'Full Page')" style="padding:8px 12px;cursor:pointer;border-radius:4px;font-size:13px;">Export Full Page</div>
+        <div onclick="exportAsImage('page-title', 'Page Title')" style="padding:8px 12px;cursor:pointer;border-radius:4px;font-size:13px;">Export Page Title</div>
+        <div onclick="exportAsImage('header-section', 'Header')" style="padding:8px 12px;cursor:pointer;border-radius:4px;font-size:13px;">Export Header</div>
+        <div onclick="exportAsImage('func-diagram', 'Features')" style="padding:8px 12px;cursor:pointer;border-radius:4px;font-size:13px;">Export Features</div>
+        <div onclick="exportAsImage('scene-grid', 'Scenarios')" style="padding:8px 12px;cursor:pointer;border-radius:4px;font-size:13px;">Export Scenarios</div>
+        <div onclick="exportAsImage('detail-gallery', 'Details')" style="padding:8px 12px;cursor:pointer;border-radius:4px;font-size:13px;">Export Details</div>
+        <div onclick="exportAsImage('specs-layout', 'Specifications')" style="padding:8px 12px;cursor:pointer;border-radius:4px;font-size:13px;">Export Specifications</div>
+        <div onclick="exportAsImage('footer-section', 'Footer')" style="padding:8px 12px;cursor:pointer;border-radius:4px;font-size:13px;">Export Footer</div>
+        <div onclick="exportAllImages()" style="padding:8px 12px;cursor:pointer;border-radius:4px;font-size:13px;background:#f5f5f5;font-weight:600;">Export All as ZIP</div>
+        <div onclick="closeExportMenu()" style="padding:8px 12px;cursor:pointer;border-radius:4px;font-size:13px;color:#888;margin-top:8px;border-top:1px solid #eee;text-align:center;">Close</div>
+    `;
+    document.body.appendChild(menu);
+
+    menu.querySelectorAll('div:not(:first-child):not(:last-child)').forEach(function(div) {
+        div.onmouseover = function() { this.style.background = '#f5f5f5'; };
+        div.onmouseout = function() { this.style.background = ''; };
+    });
+}
+
+function closeExportMenu() {
+    const menu = document.getElementById('export-menu');
+    if (menu) menu.remove();
+}
+
+document.querySelector('.export-btn').addEventListener('click', function(e) {
+    e.stopPropagation();
+    const existingMenu = document.getElementById('export-menu');
+    if (existingMenu) {
+        closeExportMenu();
+    } else {
+        showExportMenu();
+    }
+});
+
+document.addEventListener('click', function(e) {
+    if (e.target.id !== 'export-menu' && !e.target.classList.contains('export-btn')) {
+        closeExportMenu();
+    }
+});
+</script>
